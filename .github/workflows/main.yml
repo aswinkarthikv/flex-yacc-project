@@ -12,8 +12,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Install Flex, Bison, GCC
-        run: sudo apt update && sudo apt install -y flex bison gcc
+      - name: Install Flex, Bison, GCC + libfl-dev
+        run: sudo apt update && sudo apt install -y flex bison gcc libfl-dev
 
       - name: Compile (Yacc + Flex)
         run: |
