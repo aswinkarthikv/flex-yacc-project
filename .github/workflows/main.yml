@@ -1,0 +1,26 @@
+name: Run Flex and Yacc
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Install Flex, Bison, GCC
+        run: sudo apt update && sudo apt install -y flex bison gcc
+
+      - name: Compile (Yacc + Flex)
+        run: |
+          bison -d parser.y
+          flex lexer.l
+          gcc lex.yy.c parser.tab.c -o output -lfl
+
+      - name: Run Program
+        run: |
+          echo "a+b" | ./output
